@@ -1,0 +1,18 @@
+parameters:
+- name: onlyPlan
+  type: boolean
+  default: true
+
+trigger:
+- main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+jobs:
+- job: Publish_Terraform_Plan
+  displayName: 'Publish Terraform Plan'
+  steps:
+  - template: terraform-templates/terraform-template.yaml
+    parameters:
+      onlyPlan: ${{ parameters.onlyPlan }}
